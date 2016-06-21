@@ -2,7 +2,7 @@ module Electron.Options
   ( encodeOptions
   ) where
 
-import Prelude ((+), (++), (>>>), unit, (#), map)
+import Prelude ((+), (<>), (>>>), unit, (#), map)
 import Data.Argonaut.Core (Json)
 import Data.Argonaut.Encode (encodeJson, gEncodeJson')
 import Data.Foldable (foldl)
@@ -24,10 +24,10 @@ encodeOptions' = foldl insertOption M.empty >>> encodeJson
   encodeKey = simpleName >>> toCamelCase
   encodeValue (SArray options) = map force options # encodeOptions'
   encodeValue value = gEncodeJson' value
-  force = (unit #)
+  force = (unit # _)
 
 toCamelCase :: String -> String
-toCamelCase s = toLower (take 1 s) ++ drop 1 s
+toCamelCase s = toLower (take 1 s) <> drop 1 s
 
 simpleName :: String -> String
 simpleName qname =

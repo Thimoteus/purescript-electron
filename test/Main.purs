@@ -1,6 +1,6 @@
 module Test.Main where
 
-import Data.Argonaut.Combinators ((~>), (:=))
+import Data.Argonaut.Encode.Combinators ((~>), (:=))
 import Data.Argonaut.Core (jsonEmptyObject)
 
 import Test.Spec (it, describe)
